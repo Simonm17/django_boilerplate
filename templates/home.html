@@ -3,6 +3,9 @@
 {% block head_title %}{% endblock %}
 
 {% block content %}
-    <h1>Home Page</h1>
-    <p>Welcome to Django.</p>
+    {% if user.is_authenticated %}
+
+    {% else %}
+
+    {% endif %}
 {% endblock content %}
