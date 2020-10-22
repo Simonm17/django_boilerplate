@@ -15,3 +15,9 @@ Django boilerplate that uses Django all-auth's social accounts for Django's buil
 4. Social Account Providers App Client ID's & Secret Keys
 
 If error when pip install psycopg2, try pip install psycopg2-binary.
+
+##
+- If you need to use a custom user model, you can use the users app to set up.
+- You also have the option to place your app templates into the app directory itself or use the main templates folder.
+
+- Should you have any questions or concerns, please feel free to email me at ryanchuung@gmail.com
