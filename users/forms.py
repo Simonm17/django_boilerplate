@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 """
     These forms mainly aim to remove labels in order to display
-    cleaner template views.
+    cleaner template views in login/signup pages.
 """
 
 class CustomLoginForm(LoginForm):
