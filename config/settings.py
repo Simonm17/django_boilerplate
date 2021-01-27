@@ -48,9 +48,20 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 ]
 
+
+# debug_toolbar settings
+if DEBUG == True:
+    INSTALLED_APPS += ['debug_toolbar']
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -155,7 +166,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
