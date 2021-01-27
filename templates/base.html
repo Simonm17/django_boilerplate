@@ -16,9 +16,9 @@
         <a class="logo-a" href="{% url 'home' %}"><img class="logo-img" src="{% static 'img/dj-logo.png' %}" alt="Logo"></a>
         <nav>
             <ul>
-                <li>About</li>
-                <li>Socials</li>
-                <li>Demo</li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Socials</a></li>
+                <li><a href="#">Demo</a></li>
             </ul>
             <ul class='user-links'>
                 {% if user.is_authenticated %}
