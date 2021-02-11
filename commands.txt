@@ -1,4 +1,11 @@
-# Initial configurations
+# Initial configurations after cloning or forking
+
+python -m venv venv
+source venv/Scripts/activate (windows)
+source venv/bin/activate (iOs)
+
+pip install -r requirements/local.txt
+
 python manage.py makemigrations users
 python manage.py migrate
 python manage.py createsuperuser
