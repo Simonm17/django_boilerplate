@@ -6,7 +6,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
     # Make sure to configure your own sdn project key.
-    dsn="https://275b5907b11b4896b59bfd1c1bc4652b@o458567.ingest.sentry.io/5467905",
+    dsn=os.environ.get('DJANGO_SENTRY_SDN'),
     integrations=[DjangoIntegration()],
 
     # We recommend adjusting this value in production,
@@ -20,7 +20,7 @@ sentry_sdk.init(
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJ_SOCIAL_SECRET')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,7 +128,6 @@ STATICFILES_DIRS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
 
 LOGIN_URL = 'account_login'
 
