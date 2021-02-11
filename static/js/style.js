@@ -17,10 +17,10 @@ const navSlide = () => {
             }
         });
     });
-
 }
 
 const app = () => {
     navSlide();
 }
+
 app();

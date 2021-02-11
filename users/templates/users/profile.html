@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+
 {% block content %}
 
     <div class='profile-div'>

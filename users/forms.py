@@ -4,8 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 """
-    These forms mainly aim to remove labels in order to display
-    cleaner template views in login/signup pages.
+    Overriding Allauth login/signup forms to modify form labels.
 """
 
 class CustomLoginForm(LoginForm):
@@ -20,8 +19,8 @@ class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields['email'].label = ''
         self.fields['username'].label = ''
+        self.fields['email'].label = ''
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''
 

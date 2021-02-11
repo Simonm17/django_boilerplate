@@ -17,7 +17,7 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJ_SOCIAL_SECRET')
@@ -25,11 +25,8 @@ SECRET_KEY = os.environ.get('DJ_SOCIAL_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    # '*'
-]
-
 INSTALLED_APPS = [
+    # Django contrib
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,30 +35,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    'crispy_forms',
-
+    # Allauth packages
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # uncomment to use Google OAuth2 login
+    # 'allauth.socialaccount.providers.google',
 
+    # Other 3rd party packages
+    'crispy_forms',
+
+    # Django apps
     'users.apps.UsersConfig',
 ]
-
-
-# debug_toolbar settings
-if DEBUG == True:
-    INSTALLED_APPS += ['debug_toolbar']
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
-
 
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -94,11 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
-    # You can use Sqlite3 if you wish, just uncomment/comment database method.
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dj_social',
@@ -134,33 +119,20 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.abspath(os.path.join(BASE_DIR, 'static')),
     # BASE_DIR / "static",  # same thing as above
 ]
 
-MEDIA_URL = '/media/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'account_login'
 
 LOGIN_REDIRECT_URL = '/'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# replace console with smtp in production
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
 
 # Allauth settings
 AUTHENTICATION_BACKENDS = [
@@ -170,15 +142,18 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': os.environ.get('GOOGLE_AUTH_CLIENT'),
-            'secret': os.environ.get('GOOGLE_AUTH_SECRET'),
-            'key': ''
-        }
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+    # Set up your google credentials at https://console.developers.google.com/apis/credentials
+    # URI: http://127.0.0.1:8000 in development
+    # Redirect URI: http://127.0.0.1:8000/accounts/google/login/callback/ in development
+#     'google': {
+#         'APP': {
+#             'client_id': os.environ.get('GOOGLE_AUTH_CLIENT'),
+#             'secret': os.environ.get('GOOGLE_AUTH_SECRET'),
+#             'key': ''
+#         }
+#     }
+# }
 
 ACCOUNT_EMAIL_REQUIRED = True
 

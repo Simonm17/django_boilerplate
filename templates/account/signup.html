@@ -18,14 +18,13 @@
         {% endif %}
         <button class='login-button btn btn-primary' type="submit">{% trans "Sign Up" %}</button>
     </form>
-    <div class='or-div'>
-        <div class='or-sub-div'></div>
-        <div class="login-or">{% trans 'or' %}</div>
-        <div class='or-sub-div'></div>
-    </div>
-    
 
     {% if socialaccount_providers %}
+        <div class='or-div'>
+            <div class='or-sub-div'></div>
+            <div class="login-or">{% trans 'or' %}</div>
+            <div class='or-sub-div'></div>
+        </div>
         <div class="socialaccount_ballot">
             <i class='fa fa-google'></i>
             {% include "socialaccount/snippets/provider_list.html" with process="login" %}
