@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # Django apps
+    'users.apps.UsersConfig',
+
     # Allauth packages
     'allauth',
     'allauth.account',
@@ -44,9 +47,6 @@ INSTALLED_APPS = [
 
     # Other 3rd party packages
     'crispy_forms',
-
-    # Django apps
-    'users.apps.UsersConfig',
 ]
 
 SITE_ID = 1
@@ -86,13 +86,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dj_social',
+        'NAME': 'django_boilerplate',
         'USER': 'postgres',
         'PASSWORD': os.environ.get('PSQL_PASS'),
         'HOST': 'localhost',
         'PORT': '5432'
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

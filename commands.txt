@@ -1,0 +1,9 @@
+# Initial configurations
+python manage.py makemigrations users
+python manage.py migrate
+python manage.py createsuperuser
+
+# run server in development
+python manage.py runserver --settings=config.settings.local
+    or
+in manage.py: os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
