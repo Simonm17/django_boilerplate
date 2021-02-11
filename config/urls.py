@@ -14,7 +14,7 @@ def trigger_error(request):
 
 urlpatterns = [
     path('sentry-debug/', trigger_error),
-    path('admin/', admin.site.urls),
+    path('nimda/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', HomeView.as_view(), name='home'),
     path('users/', include('users.urls')),
