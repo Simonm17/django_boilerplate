@@ -4,16 +4,11 @@ from pathlib import Path
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+
 sentry_sdk.init(
-    # Make sure to configure your own sdn project key.
     dsn=os.environ.get('DJANGO_SENTRY_SDN'),
     integrations=[DjangoIntegration()],
-
-    # We recommend adjusting this value in production,
     traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
 
@@ -21,9 +16,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 INSTALLED_APPS = [
     # Django contrib
@@ -38,14 +30,13 @@ INSTALLED_APPS = [
     # Django apps
     'users.apps.UsersConfig',
 
-    # Allauth packages
+    # Allauth apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # uncomment to use Google OAuth2 login
-    # 'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
 
-    # Other 3rd party packages
+    # Other 3rd party apps
     'crispy_forms',
 ]
 
@@ -67,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            BASE_DIR / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -86,7 +77,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_boilerplate',
+        'NAME': os.environ.get('PSQL_NAME'),
         'USER': 'postgres',
         'PASSWORD': os.environ.get('PSQL_PASS'),
         'HOST': 'localhost',
@@ -125,8 +116,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.abspath(os.path.join(BASE_DIR, 'static')),
-    # BASE_DIR / "static",  # same thing as above
+    BASE_DIR / 'static',  # same thing as above
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -137,25 +127,29 @@ LOGIN_REDIRECT_URL = '/'
 
 # Allauth settings
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-    # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# SOCIALACCOUNT_PROVIDERS = {
-    # Set up your google credentials at https://console.developers.google.com/apis/credentials
-    # URI: http://127.0.0.1:8000 in development
-    # Redirect URI: http://127.0.0.1:8000/accounts/google/login/callback/ in development
-#     'google': {
-#         'APP': {
-#             'client_id': os.environ.get('GOOGLE_AUTH_CLIENT'),
-#             'secret': os.environ.get('GOOGLE_AUTH_SECRET'),
-#             'key': ''
-#         }
-#     }
-# }
+"""
+https://django-allauth.readthedocs.io/en/latest/providers.html#google
+Set up your google credentials at https://console.developers.google.com/apis/credentials
+URI: http://127.0.0.1:8000 in development
+Redirect URI: http://127.0.0.1:8000/accounts/google/login/callback/ in development
 
+Uncomment below to configure Google OAuth login
+"""
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': os.environ.get('GOOGLE_AUTH_CLIENT'),
+            'secret': os.environ.get('GOOGLE_AUTH_SECRET'),
+            'key': ''
+        }
+    }
+}
+
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_SESSION_REMEMBER = True

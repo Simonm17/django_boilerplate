@@ -7,16 +7,11 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import HomeView
 
-# For sentry test
-def trigger_error(request):
-    division_by_zero = 1 / 0
-
 
 urlpatterns = [
-    path('sentry-debug/', trigger_error),
     path('nimda/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
     path('', HomeView.as_view(), name='home'),
+    path('accounts/', include('allauth.urls')),
     path('users/', include('users.urls')),
 ]
 
@@ -25,5 +20,3 @@ if settings.DEBUG:
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls))
     ]
-
-
