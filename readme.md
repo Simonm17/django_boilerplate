@@ -1,7 +1,11 @@
-# Django Allauth Demo
+# Django + Allauth boilerplate
 
-- Django boilerplate website that uses Django all-auth for authentication
-- Includes registration and social authentication (via Google)
+- Boilerplate for Django-only projects
+- Django Allauth + Google OAuth
+- PostgreSQL
+- Custom User via AbstractUser inheritance
+- Separated development and production config settings
+
 
 ## Main packages
 - Django 3.1
